@@ -11,9 +11,12 @@ sounds = ['C4.wav', 'G4.wav']
 seed = 0
 while on:
     random.seed(seed)
+    for i in range(melodySize):
+        melody.append(random.randint(0, len(sounds)-1))
 
-    melody = random.sample(range(0,melodySize), melodySize)
-    relation = melody[1] - melody[0]
+    relation = [0]*(melodySize-1)
+    for i in range(melodySize-1):
+        relation[i] = melody[i+1] - melody[i]
 
     for i in range(melodySize):
         sound = AudioSegment.from_wav(sounds[melody[i]])
@@ -21,14 +24,15 @@ while on:
 
     ans = input('Pitch movement (^/v/>): ')
 
+    sol = ''
+    for i in range(len(relation)):
+        if relation[i] < 0:
+            sol += 'v'
+        elif relation[i] == 0:
+            sol += '>'
+        elif relation[i] > 0:
+            sol += '^'
 
-    if relation < 0:
-        sol = 'v'
-    elif relation == 0:
-        sol = '>'
-    elif relation > 0:
-        sol = '^'
-    
     if ans == sol:
         print('Correct!')
     else:

@@ -30,7 +30,12 @@ client.loop_start()
 on = True
 melodySize = 4
 melody = []
-sounds = ['C4.wav', 'G4.wav'] 
+sounds = ['Notes/C3.wav', 'Notes/C#3.wav', 'Notes/D3.wav', 'Notes/D#3.wav',
+        'Notes/E3.wav', 'Notes/F3.wav', 'Notes/F#3.wav', 'Notes/G3.wav',
+        'Notes/G#3.wav', 'Notes/A3.wav', 'Notes/A#3.wav', 'Notes/B3.wav',
+        'Notes/C4.wav', 'Notes/C#4.wav', 'Notes/D4.wav', 'Notes/D#4.wav',
+        'Notes/E4.wav', 'Notes/F4.wav', 'Notes/F#4.wav', 'Notes/G4.wav',
+        'Notes/G#4.wav', 'Notes/A4.wav', 'Notes/A#4.wav', 'Notes/B4.wav']
 seed = 0
 while on:
     random.seed(seed)
@@ -51,9 +56,9 @@ while on:
             sol += '^'
 
 ## Publish the melody and correct answer
-
-client.publish('ece180d/test', melody, qos=1)
-client.publish('ece180d/test', sol, qos=1)
+    print(str(melody))
+#    client.publish('ece180d/test',str(melody), qos=1)
+#    client.publish('ece180d/test', sol, qos=1)
 
 ## Here's how the keyboard input is processed
 
@@ -67,10 +72,10 @@ client.publish('ece180d/test', sol, qos=1)
     
 ## How to store subscribed message?
 #    ans = client.loop_start()
-    if ans == sol:
-        print('Correct!')
-    else:
-        print('Incorrect, the correct answer is : ' + sol)
+#    if ans == sol:
+#        print('Correct!')
+#    else:
+#        print('Incorrect, the correct answer is : ' + sol)
 
 
     again = input('Another round? (Y/N)')
